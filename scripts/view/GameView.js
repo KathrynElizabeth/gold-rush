@@ -5,6 +5,8 @@ var countDownText;
 var scoreText;
 var remainingMinesText;
 
+var goldUI;
+
 var score;
 
 var remainingMines = 3;
@@ -27,12 +29,16 @@ var GameView = function()
     remainingMinesText.text = "" + remainingMines;
     stage.addChild(remainingMinesText);
 
+    goldUI.x = 10;
+    goldUI.y = 10;
+    stage.addChild(goldUI);
+
     score = 0;
 
-    scoreText = new createjs.Text('0', 'bold 40px Arial', '#FFFFFF');
-    scoreText.x = 50;
-    scoreText.y = 50;
-    scoreText.text = "£" + score;
+    scoreText = new createjs.Text('0', 'bold 40px Arial', '#7c3700');
+    scoreText.x = goldUI.x + 25;
+    scoreText.y = goldUI.y + 15;
+    scoreText.text = "£   " + score;
     stage.addChild(scoreText);
 
     stage.update();
@@ -132,7 +138,6 @@ function getSurroundingSquares(col, row)
 
 function isSquareToBeRevealed(squareView)
 {
-    console.log("revealed: " + squareView.revealed);
     return (squareView.isEmpty && (squareView.revealed == false));
 }
 
@@ -156,7 +161,7 @@ function updateCountdown()
 function updateScore(event)
 {
     score = score + event.getScoreToAdd();
-    scoreText.text = "£" + score;
+    scoreText.text = "£   " + score;
 }
 
 function hideGameView()

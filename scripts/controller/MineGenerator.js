@@ -5,7 +5,7 @@ var mines;
 var GRID_WIDTH = 5;
 var GRID_HEIGHT = 5;
 
-var GRID_X = 100;
+var GRID_X;
 var GRID_Y = 50;
 
 var NUM_MINES = 3;
@@ -19,6 +19,8 @@ var MineGenerator = function()
 
 MineGenerator.genNewGrid = function()
 {
+    GRID_X = (canvas.width / 2) - ((GRID_WIDTH * square.image.width) / 2);
+
     gameGrid = new Array(GRID_WIDTH);
 
     for (var col = 0; col < GRID_WIDTH; col++)
