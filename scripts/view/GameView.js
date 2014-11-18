@@ -5,11 +5,13 @@ var countDownText;
 var scoreText;
 var remainingMinesText;
 var score;
+var lastTime;
 
 var remainingMines = 3;
 
 var GameView = function()
 {
+    music = createjs.Sound.play("music");
     stage.addChild(gameBackground);
     stage.update();
 
@@ -48,6 +50,7 @@ var GameView = function()
 
     stage.update();
     startTime = Date.now();
+    lastTime = startTime;
 
     GameView.addListeners();
 
@@ -155,6 +158,12 @@ function updateGameView()
 function updateCountdown()
 {
     timeRemaining = Math.ceil((TIME_TO_PLAY - (Date.now() - startTime)) / 1000);
+
+    if (lastTime - timeRemaining >= 1)
+    {
+        lastTime = timeRemaining;
+        tickSound = createjs.Sound.play("tick");
+    }
     countDownText.text = "" + timeRemaining;
 
     if (timeRemaining == 0)

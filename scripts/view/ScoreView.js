@@ -4,6 +4,7 @@ var coinBitmap;
 
 function ScoreView(finalScore, endGameStatus)
 {
+    createjs.Sound.stop();
     stage.addChild(scoreBackground);
 
     endGameStatusText = new createjs.Text('0', 'bold 40px Arial', '#000000');

@@ -11,6 +11,8 @@ var eventManager;
 
 function Main()
 {
+    createjs.Sound.registerPlugins([createjs.WebAudioPlugin, createjs.FlashPlugin]);
+    createjs.Sound.alternateExtensions = ["mp3"];
 	canvas = document.getElementById('GoldRushStage');
 	stage = new createjs.Stage(canvas);
 

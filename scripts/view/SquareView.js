@@ -24,6 +24,8 @@ function SquareView(col, row, isMine, numSurrounding)
 
         stage.addChild(mineBitmap);
 
+        createjs.Sound.play("explosion");
+
         EventManager.dispatch(new createjs.Event(GameEvent.MINE));
     };
 
@@ -41,6 +43,8 @@ function SquareView(col, row, isMine, numSurrounding)
         numSurroundingText.y = squareBitmap.y + (numSurroundingText.getMeasuredHeight() / 1.5);
 
         stage.addChild(numSurroundingText);
+
+        createjs.Sound.play("coin");
 
         EventManager.dispatch(new ScoreEvent(numSurrounding));
     };
@@ -60,6 +64,7 @@ function SquareView(col, row, isMine, numSurrounding)
         }
         else
         {
+            createjs.Sound.play("dirt");
             EventManager.dispatch(new EmptyEvent(col, row));
         }
     }
@@ -70,6 +75,8 @@ function SquareView(col, row, isMine, numSurrounding)
         stage.removeChild(flagBitmap);
         flagBitmap = null;
 
+        createjs.Sound.play("flag");
+
         EventManager.dispatch(new createjs.Event(GameEvent.DE_FLAG));
     };
 
@@ -79,6 +86,8 @@ function SquareView(col, row, isMine, numSurrounding)
         flagBitmap = new createjs.Bitmap("assets/flag.png");
         flagBitmap.x = squareBitmap.x;
         flagBitmap.y = squareBitmap.y;
+
+        createjs.Sound.play("flag");
 
         stage.addChild(flagBitmap);
 

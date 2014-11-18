@@ -10,8 +10,6 @@ var GRID_Y = 50;
 
 var NUM_MINES = 3;
 
-// TODO do I need a grid array as well as a mines array?
-
 var MineGenerator = function()
 {
 
