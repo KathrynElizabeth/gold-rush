@@ -10,6 +10,7 @@ var playAgainButton;
 var square;
 var mine;
 var goldUI;
+var timerUI;
 
 var _preloaderCallback;
 
@@ -30,7 +31,8 @@ PreloadCommand.execute = function(preloaderCallback)
         {src:"assets/playAgainButton.png", id:"playAgainButton"},
         {src:"assets/square.png", id:"square"},
         {src:"assets/gold_coin.png", id:"goldUI"},
-        {src:"assets/mine.png", id:"mine"}
+        {src:"assets/mine.png", id:"mine"},
+        {src:"assets/timer.png", id:"timerUI"}
 	]
 
 	preloader = new PreloadJS();

@@ -4,9 +4,6 @@ var timeRemaining;
 var countDownText;
 var scoreText;
 var remainingMinesText;
-
-var goldUI;
-
 var score;
 
 var remainingMines = 3;
@@ -18,14 +15,22 @@ var GameView = function()
 
     MineGenerator.genNewGrid();
 
+    timerUI.x = canvas.width - 160;
+    timerUI.y = 15;
+    stage.addChild(timerUI);
+
     countDownText = new createjs.Text('0', 'bold 40px Arial', '#FFFFFF');
-    countDownText.x = canvas.width - 100;
-    countDownText.y = 50;
+    countDownText.x = timerUI.x + 80;
+    countDownText.y = timerUI.y + 17;
     stage.addChild(countDownText);
+
+    mine.x = timerUI.x;
+    mine.y = timerUI.y + timerUI.image.height;
+    stage.addChild(mine);
 
     remainingMinesText = new createjs.Text('0', 'bold 40px Arial', '#FFFFFF');
     remainingMinesText.x = countDownText.x;
-    remainingMinesText.y = countDownText.y + 50;
+    remainingMinesText.y = mine.y + 20;
     remainingMinesText.text = "" + remainingMines;
     stage.addChild(remainingMinesText);
 

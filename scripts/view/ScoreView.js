@@ -1,5 +1,6 @@
 var endGameStatusText;
 var finalScoreText;
+var coinBitmap;
 
 function ScoreView(finalScore, endGameStatus)
 {
@@ -11,10 +12,15 @@ function ScoreView(finalScore, endGameStatus)
     endGameStatusText.x = (canvas.width / 2) - (endGameStatusText.getMeasuredWidth() / 2);
     stage.addChild(endGameStatusText);
 
-    finalScoreText = new createjs.Text('0', 'bold 40px Arial', '#000000');
-    finalScoreText.x = (canvas.width / 2) - (finalScoreText.getMeasuredWidth());
-    finalScoreText.y = 200;
-    finalScoreText.text = "£" + finalScore;
+    coinBitmap = new createjs.Bitmap("assets/gold_coin.png");
+    coinBitmap.x = (canvas.width / 2) - (coinBitmap.image.width);
+    coinBitmap.y = 170;
+    stage.addChild(coinBitmap);
+
+    finalScoreText = new createjs.Text('0', 'bold 40px Arial', '#7c3700');
+    finalScoreText.x = coinBitmap.x + 27;
+    finalScoreText.y = coinBitmap.y + 15;
+    finalScoreText.text = "£   " + finalScore;
     stage.addChild(finalScoreText);
 
     playAgainButton.x = (canvas.width / 2) - (playAgainButton.image.width / 2);
