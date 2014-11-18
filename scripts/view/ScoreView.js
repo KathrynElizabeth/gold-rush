@@ -18,7 +18,7 @@ function ScoreView(finalScore, endGameStatus)
     stage.addChild(finalScoreText);
 
     playAgainButton.x = (canvas.width / 2) - (playAgainButton.image.width / 2);
-    playAgainButton.y = (canvas.height - 100);
+    playAgainButton.y = (canvas.height - 200);
     playAgainButton.addEventListener('click', onPlayAgainButtonPress);
     stage.addChild(playAgainButton);
     stage.update();

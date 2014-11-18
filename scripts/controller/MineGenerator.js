@@ -77,7 +77,7 @@ function genSquares()
 
 function addSquare(col, row)
 {
-    var squareView = new SquareView(col, row, mines[col][row] == 1, getSurroundingMines(col, row));
+    gameGrid[col][row] = new SquareView(col, row, mines[col][row] == 1, getSurroundingMines(col, row));
 }
 
 function getSurroundingMines(col, row)

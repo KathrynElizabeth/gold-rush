@@ -10,6 +10,7 @@ function SquareView(col, row, isMine, numSurrounding)
     var HOLD_TIME = 0.5;
     var pressTime;
     var flagged = false;
+    var revealed = false;
 
     var flagBitmap;
 
@@ -38,8 +39,9 @@ function SquareView(col, row, isMine, numSurrounding)
         EventManager.dispatch(new ScoreEvent(numSurrounding));
     };
 
-    var revealSquare = function()
+    function revealSquare()
     {
+        this.revealed = true;
         stage.removeChild(squareBitmap);
 
         if (isMine == true)
@@ -50,13 +52,19 @@ function SquareView(col, row, isMine, numSurrounding)
         {
             showNumSurrounding();
         }
-    };
+        else
+        {
+            EventManager.dispatch(new EmptyEvent(col, row));
+        }
+    }
 
     var deFlag = function()
     {
         flagged = false;
         stage.removeChild(flagBitmap);
         flagBitmap = null;
+
+        EventManager.dispatch(new createjs.Event(GameEvent.DE_FLAG));
     };
 
     var plantFlag = function()
@@ -67,6 +75,8 @@ function SquareView(col, row, isMine, numSurrounding)
         flagBitmap.y = squareBitmap.y;
 
         stage.addChild(flagBitmap);
+
+        EventManager.dispatch(new createjs.Event(GameEvent.FLAG));
     };
 
     var onSquareMouseDown = function(event)
@@ -79,7 +89,7 @@ function SquareView(col, row, isMine, numSurrounding)
     var onSquareMouseUp = function(event)
     {
         squareBitmap.removeEventListener('pressup', onSquareMouseUp);
-        squareBitmap.addEventListener('mousedown', onSquareMouseDown);
+      //  squareBitmap.addEventListener('mousedown', onSquareMouseDown);
 
         if (flagged == true)
         {
@@ -101,5 +111,15 @@ function SquareView(col, row, isMine, numSurrounding)
     squareBitmap.addEventListener('mousedown', onSquareMouseDown);
 
     stage.addChild(squareBitmap);
+
+    var squareView =
+    {
+        revealSquare:revealSquare,
+        isEmpty:numSurrounding == 0,
+        revealed:revealed
+    };
+
+
+    return squareView;
 }
 
