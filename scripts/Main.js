@@ -6,7 +6,7 @@ var titleView;
 var scoreView;
 
 var ticker = new Object;
-
+var playingGame;
 var eventManager;
 
 function Main()
@@ -18,6 +18,7 @@ function Main()
 
 	PreloadCommand.execute(onPreloadComplete);
 
+    createjs.Touch.enable(stage);
 	createjs.Ticker.setFPS(30);
 
     eventManager = new EventManager();
@@ -45,8 +46,13 @@ function showTitleScreen()
 
 function onMineExposed(event)
 {
-    console.log("on mine exposed");
+    gameView.removeListeners();
+    playingGame = false;
+    setTimeout(onMineDelay, 2000);
+}
 
+function onMineDelay()
+{
     EventManager.dispatch(new createjs.Event(GameEvent.GAME_OVER));
 }
 
@@ -63,13 +69,19 @@ function onPlayButtonPress()
 
 function startGame(event)
 {
+    playingGame = true;
     gameView = new GameView();
     createjs.Ticker.addEventListener("tick", update);
 }
 
 function update()
 {
-   updateGameView();
+    if (playingGame)
+    {
+        gameView.update();
+    }
+
+    stage.update();
 }
 
 function onGameOver(event)

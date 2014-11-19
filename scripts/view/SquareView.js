@@ -11,6 +11,7 @@ function SquareView(col, row, isMine, numSurrounding)
     var pressTime;
     var flagged = false;
     var revealed = false;
+    var isPressing = false;
 
     var flagBitmap;
 
@@ -51,8 +52,14 @@ function SquareView(col, row, isMine, numSurrounding)
 
     function revealSquare()
     {
+        squareBitmap.removeEventListener('mousedown', onSquareMouseDown);
         this.revealed = true;
         stage.removeChild(squareBitmap);
+
+        if (flagged)
+        {
+            deFlag();
+        }
 
         if (isMine == true)
         {
@@ -97,14 +104,28 @@ function SquareView(col, row, isMine, numSurrounding)
     var onSquareMouseDown = function(event)
     {
         pressTime = Date.now();
-        squareBitmap.removeEventListener('mousedown', onSquareMouseDown);
         squareBitmap.addEventListener('pressup', onSquareMouseUp);
+
+        if (flagged == false)
+        {
+            squareBitmap.addEventListener('tick', checkForHold);
+        }
     };
+
+    function checkForHold(event)
+    {
+        if (((Date.now() - pressTime) / 1000) >= HOLD_TIME)
+        {
+            squareBitmap.removeEventListener('tick', checkForHold);
+            squareBitmap.removeEventListener('pressup', onSquareMouseUp);
+            plantFlag();
+        }
+    }
 
     var onSquareMouseUp = function(event)
     {
         squareBitmap.removeEventListener('pressup', onSquareMouseUp);
-      //  squareBitmap.addEventListener('mousedown', onSquareMouseDown);
+        squareBitmap.removeEventListener('tick', checkForHold);
 
         if (flagged == true)
         {
@@ -112,16 +133,14 @@ function SquareView(col, row, isMine, numSurrounding)
         }
         else
         {
-            if (((Date.now() - pressTime) / 1000) >= HOLD_TIME)
-            {
-                plantFlag();
-            }
-            else
-            {
-                revealSquare();
-            }
+            revealSquare();
         }
     };
+
+    function removeListeners()
+    {
+        squareBitmap.removeEventListener('mousedown', onSquareMouseDown);
+    }
 
     squareBitmap.addEventListener('mousedown', onSquareMouseDown);
 
@@ -131,7 +150,8 @@ function SquareView(col, row, isMine, numSurrounding)
     {
         revealSquare:revealSquare,
         isEmpty:numSurrounding == 0,
-        revealed:revealed
+        revealed:revealed,
+        removeListeners:removeListeners
     };
 
 

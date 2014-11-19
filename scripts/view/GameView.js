@@ -52,20 +52,45 @@ var GameView = function()
     startTime = Date.now();
     lastTime = startTime;
 
-    GameView.addListeners();
+    addListeners();
 
-    this.getScore = function()
+    function addListeners()
+    {
+        EventManager.addListener(ScoreEvent.ADD_SCORE, updateScore);
+        EventManager.addListener(GameEvent.FLAG, flagMine);
+        EventManager.addListener(GameEvent.DE_FLAG, deFlagMine);
+        EventManager.addListener(EmptyEvent.EMPTY_REVEALED, onEmptyRevealed);
+    }
+
+    function removeListeners()
+    {
+        for (var col = 0; col < GRID_WIDTH; col++)
+        {
+            for (var row = 0; row < GRID_HEIGHT; row++)
+            {
+                gameGrid[col][row].removeListeners();
+            }
+        }
+    }
+
+    function getScore()
     {
         return score;
-    };
-};
+    }
 
-GameView.addListeners = function()
-{
-    EventManager.addListener(ScoreEvent.ADD_SCORE, updateScore);
-    EventManager.addListener(GameEvent.FLAG, flagMine);
-    EventManager.addListener(GameEvent.DE_FLAG, deFlagMine);
-    EventManager.addListener(EmptyEvent.EMPTY_REVEALED, onEmptyRevealed);
+    function update()
+    {
+        updateCountdown();
+    }
+
+    var gameView =
+    {
+        removeListeners:removeListeners,
+        getScore:getScore,
+        update:update
+    };
+
+    return gameView;
 };
 
 function flagMine(event)
@@ -147,12 +172,6 @@ function getSurroundingSquares(col, row)
 function isSquareToBeRevealed(squareView)
 {
     return (squareView.isEmpty && (squareView.revealed == false));
-}
-
-function updateGameView()
-{
-    updateCountdown();
-    stage.update();
 }
 
 function updateCountdown()
