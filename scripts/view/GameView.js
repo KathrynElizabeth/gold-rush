@@ -21,7 +21,7 @@ var GameView = function()
     timerUI.y = 15;
     stage.addChild(timerUI);
 
-    countDownText = new createjs.Text('0', 'bold 40px Arial', '#FFFFFF');
+    countDownText = new createjs.Text('0', 'bold 40px RedStateBlueState', '#FFFFFF');
     countDownText.x = timerUI.x + 80;
     countDownText.y = timerUI.y + 17;
     stage.addChild(countDownText);
@@ -30,10 +30,10 @@ var GameView = function()
     mine.y = timerUI.y + timerUI.image.height;
     stage.addChild(mine);
 
-    remainingMinesText = new createjs.Text('0', 'bold 40px Arial', '#FFFFFF');
+    remainingMinesText = new createjs.Text('0', 'bold 40px RedStateBlueState', '#FFFFFF');
     remainingMinesText.x = countDownText.x;
     remainingMinesText.y = mine.y + 20;
-    remainingMinesText.text = "" + remainingMines;
+    remainingMinesText.text = "" + GameGlobals.START_MINES;
     stage.addChild(remainingMinesText);
 
     goldUI.x = 10;
@@ -42,10 +42,10 @@ var GameView = function()
 
     score = 0;
 
-    scoreText = new createjs.Text('0', 'bold 40px Arial', '#7c3700');
+    scoreText = new createjs.Text('0', 'bold 40px RedStateBlueState', '#7c3700');
     scoreText.x = goldUI.x + 25;
-    scoreText.y = goldUI.y + 15;
-    scoreText.text = "£   " + score;
+    scoreText.y = goldUI.y + 20;
+    scoreText.text = "£  " + score;
     stage.addChild(scoreText);
 
     stage.update();

@@ -7,7 +7,7 @@ function ScoreView(finalScore, endGameStatus)
     createjs.Sound.stop();
     stage.addChild(scoreBackground);
 
-    endGameStatusText = new createjs.Text('0', 'bold 40px Arial', '#000000');
+    endGameStatusText = new createjs.Text('0', 'bold 40px RedStateBlueState', '#ee0000');
     endGameStatusText.y = 100;
     endGameStatusText.text = endGameStatus;
     endGameStatusText.x = (canvas.width / 2) - (endGameStatusText.getMeasuredWidth() / 2);
@@ -18,10 +18,10 @@ function ScoreView(finalScore, endGameStatus)
     coinBitmap.y = 170;
     stage.addChild(coinBitmap);
 
-    finalScoreText = new createjs.Text('0', 'bold 40px Arial', '#7c3700');
+    finalScoreText = new createjs.Text('0', 'bold 40px RedStateBlueState', '#7c3700');
     finalScoreText.x = coinBitmap.x + 27;
-    finalScoreText.y = coinBitmap.y + 15;
-    finalScoreText.text = "£   " + finalScore;
+    finalScoreText.y = coinBitmap.y + 20;
+    finalScoreText.text = "£  " + finalScore;
     stage.addChild(finalScoreText);
 
     playAgainButton.x = (canvas.width / 2) - (playAgainButton.image.width / 2);

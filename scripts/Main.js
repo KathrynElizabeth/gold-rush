@@ -5,9 +5,10 @@ var gameView;
 var titleView;
 var scoreView;
 
-var ticker = new Object;
 var playingGame;
 var eventManager;
+
+var gameStatus;
 
 function Main()
 {
@@ -44,20 +45,10 @@ function showTitleScreen()
     titleView = new TitleView();
 }
 
-function onMineExposed(event)
-{
-    gameView.removeListeners();
-    playingGame = false;
-    setTimeout(onMineDelay, 2000);
-}
-
-function onMineDelay()
-{
-    EventManager.dispatch(new createjs.Event(GameEvent.GAME_OVER));
-}
 
 function onTimeUp(event)
 {
+    gameStatus = "Time Up!";
     EventManager.dispatch(new createjs.Event(GameEvent.GAME_OVER));
 }
 
@@ -84,6 +75,19 @@ function update()
     stage.update();
 }
 
+function onMineExposed(event)
+{
+    gameView.removeListeners();
+    gameStatus = "Bombed!";
+    playingGame = false;
+    setTimeout(onMineDelay, 2000);
+}
+
+function onMineDelay()
+{
+    EventManager.dispatch(new createjs.Event(GameEvent.GAME_OVER));
+}
+
 function onGameOver(event)
 {
     createjs.Ticker.removeEventListener("tick", update);
@@ -93,10 +97,11 @@ function onGameOver(event)
 
 function onGameWin(event)
 {
-    console.log("on game win");
+    gameStatus = "You win!";
+    showScoreScreen();
 }
 
 function showScoreScreen()
 {
-    scoreView = new ScoreView(gameView.getScore(), "Time Up!");
+    scoreView = new ScoreView(gameView.getScore(), gameStatus);
 }

@@ -38,10 +38,10 @@ function SquareView(col, row, isMine, numSurrounding)
 
         stage.addChild(coinBitmap);
 
-        var numSurroundingText = new createjs.Text('0', 'bold 30px Arial', '#7c3700');
+        var numSurroundingText = new createjs.Text('0', 'bold 40px RedStateBlueState', '#7c3700');
         numSurroundingText.text = numSurrounding;
         numSurroundingText.x = squareBitmap.x + 27;
-        numSurroundingText.y = squareBitmap.y + (numSurroundingText.getMeasuredHeight() / 1.5);
+        numSurroundingText.y = squareBitmap.y + (numSurroundingText.getMeasuredHeight()/1.5);
 
         stage.addChild(numSurroundingText);
 

@@ -1,0 +1,17 @@
+@font-face
+{
+    font-family: RedStateBlueState;
+    src: url('../assets/fonts/RedStateBlueStateBB_reg.ttf');
+}
+canvas
+{
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    width: 800px;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-user-select:none;
+    -webkit-touch-callout:none;
+}
