@@ -7,7 +7,7 @@ var remainingMinesText;
 var score;
 var lastTime;
 
-var remainingMines = 3;
+var remainingMines = GameGlobals.START_MINES;
 
 var GameView = function()
 {
