@@ -11,8 +11,6 @@ function SquareView(col, row, isMine, numSurrounding)
     var pressTime;
     var flagged = false;
     var revealed = false;
-    var isPressing = false;
-
     var flagBitmap;
 
     var showMine = function()
